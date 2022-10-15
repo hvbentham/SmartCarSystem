@@ -1,0 +1,13 @@
+server:
+  port: 9090
+
+spring:
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://bj-cynosdbmysql-grp-f9rwf4ho.sql.tencentcdb.com:26875/WareHouseManage?serverTimezone=GMT%2b8
+      username: name1
+      password: Name1_123456
+mybatis:
+#  mapper-locations: classpath*:Mapper/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
