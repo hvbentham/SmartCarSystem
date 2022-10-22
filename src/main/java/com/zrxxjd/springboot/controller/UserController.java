@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
 
@@ -45,7 +46,10 @@ public class UserController {
     public int  del(@PathVariable int  id){
         return userMapper.delete(id);
     }
-
+    @DeleteMapping("/pageDelete")
+    public int  delT(@RequestParam Integer pageNum, @RequestParam  Integer pageSize){
+        return userMapper.deleteT(pageNum,pageSize);
+    }
     @CrossOrigin
     @RequestMapping("/test")
     public String test(){

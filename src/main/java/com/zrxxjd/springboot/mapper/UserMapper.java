@@ -21,4 +21,6 @@ public interface UserMapper {
     List<User> selectPage(@Param("pageNum") Integer pageNum,@Param("pageSize") Integer pageSize);
     @Select("select count(*) from smartcar")
     Integer selectTotal();
+    @Delete("delete from smartcar where sno in (select sno from smartcar limit #{pageNum},#{pageSize} as id);")
+    int deleteT(@Param("pageNum") Integer pageNum,@Param("pageSize") Integer pageSize );
 }
