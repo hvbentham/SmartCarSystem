@@ -3,6 +3,7 @@ package com.zrxxjd.springboot.service;
 import com.zrxxjd.springboot.entity.AdminVO;
 import com.zrxxjd.springboot.entity.Administrator;
 import com.zrxxjd.springboot.mapper.AdministratorMapper;
+import com.zrxxjd.springboot.utils.JwtUtils;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -17,13 +20,20 @@ public class AdministratorService {
     @Autowired
     private AdministratorMapper administratorMapper;
 
-    public int valid(Administrator administrator){
-        if(Objects.isNull(administratorMapper.validWorker(administrator.getAccount(),administrator.getPassword()))){
-            return 0;
+    public Map<String ,Object> valid(Administrator administrator){
+        Administrator admin=administratorMapper.findByUsernameAndPassword(administrator);
+        Map<String,Object> map=new HashMap<>();
+        map.put("user",admin);
+        if(Objects.isNull(admin)){
+            map.put("token",null);
+            return map;
         }
-        else{
-            return 1;
-        }
+
+        admin.setPassword(null);
+        //生成Token并返回
+        String token = JwtUtils.generateToken(administrator.getAccount());
+        map.put("token",token);
+        return map;
     }
 
     public int save(AdminVO adminVO) {

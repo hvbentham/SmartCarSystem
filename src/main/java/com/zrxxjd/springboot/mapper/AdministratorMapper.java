@@ -14,7 +14,7 @@ public interface AdministratorMapper {
    @Update("update administrator set name=#{name},gender=#{gender},DOB=#{DOB} where administratorID=#{administratorID}")
     Integer update(Administrator administrator);
 
-   @Insert("insert into administrator(administratorID,name,gender,DOB,salary,account,password) values (#{administratorID},#{name},#{gender},#{DOB},#{salary},#{account},#{password})")
+   @Insert("insert into administrator(name,gender,DOB,salary,account,password) values (#{name},#{gender},#{DOB},#{salary},#{account},#{password})")
     Integer insert(Administrator administrator);
 
     @Select("select count(*) from administrator")
@@ -28,4 +28,7 @@ public interface AdministratorMapper {
 
     @Delete("delete from administrator where administratorID=#{administratorID}")
     int delete(@Param("administratorID") int administratorID);
+
+    @Select("select * from administrator where account=#{account} and password=#{password}")
+    Administrator findByUsernameAndPassword(Administrator administrator);
 }

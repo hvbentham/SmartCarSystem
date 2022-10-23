@@ -22,8 +22,8 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
-    @GetMapping("/valid")
-    public Integer Valid(@RequestBody Administrator administrator){
+    @PostMapping ("/valid")
+    public Map<String, Object> Valid(@RequestBody Administrator administrator){
       return administratorService.valid(administrator);
     }
 

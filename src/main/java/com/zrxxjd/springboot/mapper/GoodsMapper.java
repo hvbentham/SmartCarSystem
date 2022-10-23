@@ -17,7 +17,7 @@ public interface GoodsMapper {
     @Select("select count(*) from goods")
     Integer selectTotal();
 
-    @Insert("insert into goods(goodsID,color,shelfID,shelfLocation,warehouseID) values (#{goodsID},#{color},#{shelfID},#{shelfLocation},#{warehouseID})")
+    @Insert("insert into goods(color,shelfID,shelfLocation,warehouseID) values (#{color},#{shelfID},#{shelfLocation},#{warehouseID})")
     Integer insert(Goods goods);
 
     @Delete("delete from goods where goodsID=#{goodsID}")
